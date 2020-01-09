@@ -1,31 +1,32 @@
 var fs = require('fs');
 
-// escreve no arquivo
-// fs.writeFile('my_file.txt', 'Treina Web', function(err){
-//     if(err){
-//         console.error(err);
-//     }
-//     console.log('Arquivo Criado');
-// });
+// console.time('Assincrono');
+// var counter = 0;
 
-// insere texto no arquivo
-// fs.appendFile('my_file.txt', 'testeee', function(err){
-//     if(err){
-//         console.error(err);
-//     }
-//     console.log('Arquivo Criado');
-// });
+// for(var i = 0; i < 1000; i++){
+//     fs.readFile('my_file.txt',function(err, data){
+//         if(err){
+//             return console.error(err);
+//         }
+//         counter++;
+//         console.log('Assincrono ' + data.toString());
+//         if(counter === 1000){
+//             console.timeEnd('Assincrono');
+//         }
+//     })
+// }
 
-// ler texto do arquivo
-// fs.readFile('my_file.txt', function(err, data){
-//     if(err){
-//         console.error(err); 
-//     }
-//     console.log(data.toString());
-// });
+// 196.310 ms de resposta no acima
 
-var data = fs.readFileSync('my_file.txt');
-console.log(data.toString());
-    
+console.time('Sincrono');
+var counter = 0;
+
+for(var i = 0; i < 1000; i++){
+    var data = fs.readFileSync('my_file.txt');
+    console.log('Sincrono ' + data);
+}
+    console.timeEnd('Sincrono');
+
+// 114.557 ms levou o sincrono
 
 
