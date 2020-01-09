@@ -1,10 +1,31 @@
-var EventEmitter = require ('events');
+var fs = require('fs');
 
-var emitter = new EventEmitter();
+// escreve no arquivo
+// fs.writeFile('my_file.txt', 'Treina Web', function(err){
+//     if(err){
+//         console.error(err);
+//     }
+//     console.log('Arquivo Criado');
+// });
 
-emitter.on('meu evento', function(numero){
-    console.log('meu evento', numero)
-});
+// insere texto no arquivo
+// fs.appendFile('my_file.txt', 'testeee', function(err){
+//     if(err){
+//         console.error(err);
+//     }
+//     console.log('Arquivo Criado');
+// });
 
-emitter.emit('meu evento', 123);
+// ler texto do arquivo
+// fs.readFile('my_file.txt', function(err, data){
+//     if(err){
+//         console.error(err); 
+//     }
+//     console.log(data.toString());
+// });
+
+var data = fs.readFileSync('my_file.txt');
+console.log(data.toString());
+    
+
 
