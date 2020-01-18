@@ -1,21 +1,10 @@
-var http = require('http');
-var ls = require('fs');
-var url = require('url');
+var io = require('socket.io')(3000);
 
-var server = http.createServer(function(req, resp){
-    var url_parts = url.parse(req.url);
-    var path = url_parts.pathname;
+io.on("connection", (socket) => {
+    console.log('novo usuario conectado');
 
-    ls.readFile(__dirname + path, function(err, data){
-        if(err){
-            resp.writeHead(404, {'Content-Type': 'text/html'});
-            resp.write('Not found');
-        }else{
-            resp.writeHead(200, {'Content-Type': 'text/html'})
-            resp.write(data);
-        }
-        resp.end();
+    socket.on('client_hello', (data)=>{
+        io.sockets.emit('server_hello', data);
     })
 });
 
-server.listen(3000);
